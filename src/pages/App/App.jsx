@@ -8,7 +8,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   return (
     <main>
