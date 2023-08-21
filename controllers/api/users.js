@@ -22,6 +22,7 @@ async function create(req, res) {
 // Helper Functions
 
 function createJWT(user) {
+  console.log(process.env.SECRET);
   return jwt.sign(
     // data payload
     { user },
