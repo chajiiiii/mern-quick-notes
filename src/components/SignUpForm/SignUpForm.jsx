@@ -1,5 +1,6 @@
 // Class components typically inherit from the Component class defined in React library
 import { Component } from "react";
+import { signUp } from "../../utilities/users-service";
 
 export default class SignUpForm extends Component {
   state = {
@@ -17,9 +18,24 @@ export default class SignUpForm extends Component {
     });
   };
 
-  handleSubmit = (evt) => {
+  handleSubmit = async (evt) => {
     evt.preventDefault();
-    alert(JSON.stringify(this.state));
+    try {
+      const { name, email, password } = this.state;
+      const formData = { name, email, password };
+      //   or
+      // const formData = {...this.state}
+      // delete formData.confirm;
+      // delete formData.error;
+
+      // The promise returned by the signUP service method
+      // Will resolve to the user object included in the payload of the JSON Web Token(JWT)
+      const user = await signUp(formData);
+      console.log(user);
+    } catch {
+      // An error occurred, probs due to a duplicate email
+      this.setState({ error: "Sign Up Failed - Try Again" });
+    }
   };
 
   render() {
