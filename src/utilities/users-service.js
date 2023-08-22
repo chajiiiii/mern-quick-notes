@@ -13,6 +13,13 @@ export async function signUp(userData) {
   return getUser();
 }
 
+export async function login(credentials) {
+  const token = await usersAPI.login(credentials);
+  localStorage.setItem("token", token);
+
+  return token;
+}
+
 export function logOut() {
   localStorage.removeItem("token");
 }
@@ -31,6 +38,10 @@ export function getToken() {
     return null;
   }
   return token;
+}
+
+export function checkToken() {
+  return usersAPI.checkToken().then((dateStr) => new Date(dateStr));
 }
 
 export function getUser() {
