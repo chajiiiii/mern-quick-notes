@@ -24,8 +24,10 @@ app.use(require("./config/checkToken"));
 
 // Put API routes here, before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
+const ensureLoggedIn = require("./config/ensureLoggedIn");
+app.use("/api/notes", ensureLoggedIn, require("./routes/api/notes"));
 
-// sei.com/order/1
+// sei.com/order/
 app.get("/order/:id", function (req, res) {
   // return JSON
 });
